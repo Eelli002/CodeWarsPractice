@@ -1,0 +1,53 @@
+Write a funtion that takes two strings, s1 and s2 and return th elongest common susequence of s1 and s2
+
+'ABAZDC', 'BACBAD' => 'ABAD'
+'AGGTAB', 'GXTXAYB" => 'GTAB'
+'aaaa', 'aa' => 'aa'
+
+// start a pointer at s1[0] and a pointer at s2[0]
+// if s1[0] === s2[0], move both up
+// else if s1[0] !== s2[0] move s2 pointer up one 
+
+function subString(s1, s2) {
+    let s1Pointer = 0;
+    let s2Pointer = 0;
+
+    let longest = s1.length > s2.length ? s1.length : s2.length;
+    let finalStr = '';
+
+    while (s1Pointer < longest) {
+        if (s1[s1Pointer] === s2[s2Pointer]) {
+            s1Pointer++;
+            s2Pointer++;
+            finalStr += s1[s1Pointer]
+        }
+        s2Pointer++;
+    }
+    return finalStr;
+}
+
+subString('ABAZDC', 'BACBAD');
+
+'ABAZDC', 'BACBAD'
+ ^         ^ // condition not met, increase s2Pointer
+
+'ABAZDC', 'BACBAD'
+ ^          ^ // condition met, increase both pointers and push A to finalStr;
+
+'ABAZDC', 'BACBAD'
+  ^          ^ // Condition not met, increase s2Pointer
+
+'ABAZDC', 'BACBAD'
+  ^           ^ // Condition met, increase both pointers and push B to finalStr;
+
+'ABAZDC', 'BACBAD'
+   ^           ^ //   Condition met, increase both pointers and push A to finalStr;
+
+'ABAZDC', 'BACBAD'
+    ^           ^ // Condtion not met, increase s2Pointer
+
+// if s1[i] === s2[j] move both pointers up and pass in the value of the str
+// else move s2 pointer up
+// if s1 pointer == s1.length move s2 pointer up until you find a match and pass it in
+// if s2 pointer === s2.length move s1 pointer up until you find a match and pass it in
+// return str
